@@ -70,7 +70,7 @@ Function ConvertTo-EvtObject  {
 
 #a small test - change the LogName and Filter to suit
 #$events = Get-WinEvent -LogName Application -FilterXPath "*[System[EventID=0]]" -MaxEvents 1
-#$events = Get-WinEvent -LogName Security -FilterXPath "*[System[EventID=4624]]" -MaxEvents 1
+$events = Get-WinEvent -LogName Security -FilterXPath "*[System[EventID=4624]]" -MaxEvents 1
 #$events = Get-WinEvent -LogName Application -FilterXPath "*[System[EventID=1000]]" -MaxEvents 1
-$events = Get-WinEvent -LogName Application -FilterXPath "*[UserData]" -MaxEvents 1000
+#$events = Get-WinEvent -LogName Application -FilterXPath "*[UserData]" -MaxEvents 1000
 ConvertTo-EvtObject $events
