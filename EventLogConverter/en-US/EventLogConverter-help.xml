@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml" xmlns="http://msh">
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>ConvertTo-EvtObject</command:name>
+      <command:verb>ConvertTo</command:verb>
+      <command:noun>EvtObject</command:noun>
+      <maml:description>
+        <maml:para>This cmdlet converts Event objects into flat Evt objects</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This cmdlet takes input of standard event records as produced by Get-WinEvent and converts them into a flatter object structure that is easier to query and to extract data from.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>ConvertTo-EvtObject</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+          <maml:name>InputObject</maml:name>
+          <maml:Description>
+            <maml:para>A standard Windows Event Log record, such as the output from Get-WinEvent</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Object[]</command:parameterValue>
+          <dev:type>
+            <maml:name>Object[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+        <maml:name>InputObject</maml:name>
+        <maml:Description>
+          <maml:para>A standard Windows Event Log record, such as the output from Get-WinEvent</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Object[]</command:parameterValue>
+        <dev:type>
+          <maml:name>Object[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Object[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-WinEvent -LogName Security -FilterXPath "*[System[EventID=4624]]" -MaxEvents 1 | ConvertTo-EvtObject
+
+
+ProviderName              : Microsoft-Windows-Security-Auditing
+ProviderGuid              : {54849625-5478-4994-A5BA-3E3B0328C30D}
+EventID                   : 4624
+Version                   : 2
+Level                     : 0
+Task                      : 12544
+Opcode                    : 0
+Keywords                  : 0x8020000000000000
+TimeCreatedSystemTime     : 2019-06-06T09:54:39.488885200Z
+EventRecordID             : 245041
+CorrelationActivityID     : {D8BF886D-19F4-0000-8288-BFD8F419D501}
+ExecutionProcessID        : 584
+ExecutionThreadID         : 2760
+Channel                   : Security
+Computer                  : WIN-90CID1J2CS5.carisbrookelabs.local
+SubjectUserSid            : S-1-0-0
+SubjectUserName           : -
+SubjectDomainName         : -
+SubjectLogonId            : 0x0
+TargetUserSid             : S-1-5-18
+TargetUserName            : WIN-90CID1J2CS5$
+TargetDomainName          : CARISBROOKELABS.LOCAL
+TargetLogonId             : 0x1c8cb49
+LogonType                 : 3
+LogonProcessName          : Kerberos
+AuthenticationPackageName : Kerberos
+WorkstationName           : -
+LogonGuid                 : {1B89B270-CD8E-CD3F-22E5-1DB88383FB10}
+TransmittedServices       : -
+LmPackageName             : -
+KeyLength                 : 0
+ProcessId                 : 0x0
+ProcessName               : -
+IpAddress                 : fe80::7180:bb16:703d:28ca
+IpPort                    : 52564
+ImpersonationLevel        : %%1840
+RestrictedAdminMode       : -
+TargetOutboundUserName    : -
+TargetOutboundDomainName  : -
+VirtualAccount            : %%1843
+TargetLinkedLogonId       : 0x0
+ElevatedToken             : %%1842</dev:code>
+        <dev:remarks>
+          <maml:para>In this example we extract a single 4624 event from the security log and pass it to ConvertTo-EvtObject over the pipeline.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+</helpItems>

@@ -1,7 +1,9 @@
+[CmdletBinding()]
+Param()
 Function ConvertTo-EvtObject  {
     [cmdletbinding()]
     Param (
-    [parameter(ValueFromPipelineByPropertyName,ValueFromPipeline)]
+    [parameter(ValueFromPipelineByPropertyName,ValueFromPipeline,Mandatory=$true)]
     [Object[]]$InputObject
     )
     Process {
