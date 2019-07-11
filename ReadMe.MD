@@ -1,6 +1,7 @@
 # EventLogConverter
+[![Build Status](https://dev.azure.com/wightsci/GitHub%20Repos/_apis/build/status/wightsci.EventLogConverter?branchName=master)](https://dev.azure.com/wightsci/GitHub%20Repos/_build/latest?definitionId=1&branchName=master)
 
-A script to take Windows Event Log entries and make them easier to query and generally mine data from.
+A module to take Windows Event Log entries and make them easier to query and generally mine data from.
 
 ## What does this do?
 
