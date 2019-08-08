@@ -54,8 +54,27 @@ Function ConvertTo-EvtObject  {
             if ($xdoc.Event.UserData) {        
                 $xdoc.Event.UserData | ForEach-Object { 
                     $PropertyName = 'UserData'
-                    $PropertyValue = $_.InnerXML
-                    $obj | Add-Member -MemberType NoteProperty -Name $PropertyName -Value $PropertyValue
+                    if ($_.ChildNodes) {
+                        $ParentName =  $_.LocalName
+                        $_.ChildNodes | ForEach-Object {
+                            $PropertyName = "$ParentName$($_.localName)"
+                            if ($_.ChildNodes) {
+                                $ParentName = $_.LocalName
+                                $_.ChildNodes | ForEach-Object {
+                                    $PropertyName = "$ParentName$($_.localName)"
+                                    $PropertyValue = $_.InnerXML
+                                    $obj | Add-Member -MemberType NoteProperty -Name $PropertyName -Value $PropertyValue 
+                                }   
+                            } else {
+                                $PropertyValue = $_.InnerXML
+                                $obj | Add-Member -MemberType NoteProperty -Name $PropertyName -Value $PropertyValue 
+                            }
+                        }
+                    } 
+                    else {
+                        $PropertyValue = $_.InnerXML
+                        $obj | Add-Member -MemberType NoteProperty -Name $PropertyName -Value $PropertyValue 
+                    }
                 }
             }
             #if there is a Binary node, try to handle that
