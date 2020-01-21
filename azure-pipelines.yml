@@ -27,5 +27,9 @@ steps:
   name: testModuleStep
   workingDirectory: $(build.sourcesDirectory)
   failOnStderr: 'true'
-- powershell: Publish-Module -Path .\EventLogConverter -NuGetApiKey $env:GALLERY_KEY
+- powershell: Publish-Module -Path .\EventLogConverter -NuGetApiKey $(GALLERY_KEY)
+  displayName: Publish to PowerShell Gallery
+  name: publishStep
+  workingDirectory: $(build.sourcesDirectory)
+  failOnStderr: 'true'
 
