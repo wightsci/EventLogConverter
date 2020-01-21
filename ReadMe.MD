@@ -3,6 +3,12 @@
 
 A module to take Windows Event Log entries and make them easier to query and generally mine data from.
 
+Now available from the [PowerShell Gallery](https://www.powershellgallery.com/packages/EventLogConverter/)! Install using:
+
+```PowerShell
+Install-Module EventLogConverter
+```
+
 ## What does this do?
 
 The idea is to take the nested data structures of a typical Windows Event and make them flat, so that all of the useful properties are easily accessible via standard
