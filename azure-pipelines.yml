@@ -22,3 +22,10 @@ steps:
   failOnStderr: 'true'
   env:
     name: WightSci
+- powershell: Test-ModuleManifest -Path .\EventLogConverter\EventLogConverter.psd1
+  displayName: Test Module Manifest
+  name: testModuleStep
+  workingDirectory: $(build.sourcesDirectory)
+  failOnStderr: 'true'
+- powershell: Publish-Module -Path .\EventLogConverter -NuGetApiKey $env:GALLERY_KEY
+
