@@ -7,7 +7,7 @@ Function ConvertTo-EvtObject  {
     [Object[]]$InputObject
     )
     Process {
-        $Objects = @()
+        [System.Collections.ArrayList]$Objects = @()
         $InputObject | ForEach-Object { 
             $xdoc =  [xml]$_.ToXML()
             $obj = New-Object PSObject
@@ -36,9 +36,12 @@ Function ConvertTo-EvtObject  {
             #create NoteProperty for each EventData.Data node
             $DataCounter = 0
             if ($xdoc.Event.EventData) {        
-                $xdoc.Event.EventData.Data | ForEach-Object { 
+                $xdoc.Event.EventData.Data | ForEach-Object {
                     if ($_.Name) {
-                        $PropertyName = "Data$($_.Name)"
+                        $PropertyName = $_.Name
+                        if ($obj.$PropertyName) {
+                            $PropertyName = "$($_.Name)01"
+                        }
                         $PropertyValue = $_.innerText
                     }
                     else {
@@ -83,7 +86,7 @@ Function ConvertTo-EvtObject  {
                 $PropertyValue =  $xdoc.Event.EventData.Binary.toString()
                 $obj | Add-Member -MemberType NoteProperty -Name $PropertyName -Value $PropertyValue
             }
-            $Objects += $obj
+            [Void]$Objects.Add($obj)
         }
         $Objects
     }
