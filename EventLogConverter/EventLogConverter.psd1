@@ -12,7 +12,7 @@
 RootModule = 'EventLogConverter.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.2'
+ModuleVersion = '1.0.3'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -107,7 +107,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        # ReleaseNotes = ''
+        ReleaseNotes = 'This release adds a new behaviour when an EventData node name clashes - a numeric 01 is added as a suffix to the node name.'
 
         # External dependent modules of this module
         # ExternalModuleDependencies = ''
