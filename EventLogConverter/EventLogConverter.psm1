@@ -1,7 +1,7 @@
 [CmdletBinding()]
 Param()
 Function ConvertTo-EvtObject  {
-    [cmdletbinding()]
+    [CmdletBinding()]
     Param (
     [parameter(ValueFromPipelineByPropertyName,ValueFromPipeline,Mandatory=$true)]
     [Object[]]$InputObject
@@ -38,7 +38,7 @@ Function ConvertTo-EvtObject  {
             if ($xdoc.Event.EventData) {        
                 $xdoc.Event.EventData.Data | ForEach-Object { 
                     if ($_.Name) {
-                        $PropertyName = $_.Name
+                        $PropertyName = "Data$($_.Name)"
                         $PropertyValue = $_.innerText
                     }
                     else {
