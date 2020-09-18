@@ -4,12 +4,22 @@ Function ConvertTo-EvtObject  {
     [CmdletBinding()]
     Param (
     [parameter(ValueFromPipelineByPropertyName,ValueFromPipeline,Mandatory=$true)]
-    [Object[]]$InputObject
+    $InputObject
     )
     Process {
         [System.Collections.ArrayList]$Objects = @()
-        $InputObject | ForEach-Object { 
-            $xdoc =  [xml]$_.ToXML()
+        Write-Verbose "$($InputObject.GetType().BaseType)"
+        if ( $InputObject.GetType().BaseType.toString() -eq 'System.Xml.XmlNode') {
+            $InputObject = $InputObject.Events.Event.outerxml | ForEach-Object { [xml]$_ }
+        }
+        $InputObject | ForEach-Object {
+            Write-Verbose "$($_.GetType().BaseType)"
+            if ( $_.GetType().BaseType.toString() -eq 'System.Xml.XmlNode') {
+                $xdoc = $_
+            }
+            else {    
+                $xdoc =  [xml]$_.ToXML()
+            }
             $obj = New-Object PSObject
             #create NoteProperty for each System node - check for attributes and create
             #a new property using a <node><attribute> syntax
