@@ -17,11 +17,62 @@ ConvertTo-EvtObject [-InputObject] <Object[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This cmdlet takes input of standard event records as produced by Get-WinEvent and converts them into a flatter object structure that is easier to query and to extract data from.
+This cmdlet takes input of standard event records as produced by Get-WinEvent or the XML output from Windows event viewer and converts them into a flatter object structure that is easier to query and to extract data from.
 
 ## EXAMPLES
 
 ### Example 1
+```powershell
+PS C:\> [xml]$events = Get-Content C:\Users\User\Desktop\eventexport.xml
+PS C:\> ConvertTo-EvtObject $events
+
+ProviderName              : Microsoft-Windows-Security-Auditing
+ProviderGuid              : {54849625-5478-4994-A5BA-3E3B0328C30D}
+EventID                   : 4624
+Version                   : 2
+Level                     : 0
+Task                      : 12544
+Opcode                    : 0
+Keywords                  : 0x8020000000000000
+TimeCreatedSystemTime     : 2019-06-06T09:54:39.488885200Z
+EventRecordID             : 245041
+CorrelationActivityID     : {D8BF886D-19F4-0000-8288-BFD8F419D501}
+ExecutionProcessID        : 584
+ExecutionThreadID         : 2760
+Channel                   : Security
+Computer                  : WIN-90CID1J2CS5.carisbrookelabs.local
+SubjectUserSid            : S-1-0-0
+SubjectUserName           : -
+SubjectDomainName         : -
+SubjectLogonId            : 0x0
+TargetUserSid             : S-1-5-18
+TargetUserName            : WIN-90CID1J2CS5$
+TargetDomainName          : CARISBROOKELABS.LOCAL
+TargetLogonId             : 0x1c8cb49
+LogonType                 : 3
+LogonProcessName          : Kerberos
+AuthenticationPackageName : Kerberos
+WorkstationName           : -
+LogonGuid                 : {1B89B270-CD8E-CD3F-22E5-1DB88383FB10}
+TransmittedServices       : -
+LmPackageName             : -
+KeyLength                 : 0
+ProcessId                 : 0x0
+ProcessName               : -
+IpAddress                 : fe80::7180:bb16:703d:28ca
+IpPort                    : 52564
+ImpersonationLevel        : %%1840
+RestrictedAdminMode       : -
+TargetOutboundUserName    : -
+TargetOutboundDomainName  : -
+VirtualAccount            : %%1843
+TargetLinkedLogonId       : 0x0
+ElevatedToken             : %%1842
+```
+
+In this example we exported a single event to an XML file from Windows event viewer and passed it to ConvertTo-EvtObject via a variable.
+
+### Example 2
 ```powershell
 PS C:\> Get-WinEvent -LogName Security -FilterXPath "*[System[EventID=4624]]" -MaxEvents 1 | ConvertTo-EvtObject
 
@@ -75,7 +126,7 @@ In this example we extract a single 4624 event from the security log and pass it
 ## PARAMETERS
 
 ### -InputObject
-A standard Windows Event Log record, such as the output from Get-WinEvent
+A standard Windows Event Log record, such as the output from Get-WinEvent or the XML output from Windows event viewer.
 
 ```yaml
 Type: Object[]
