@@ -107,7 +107,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'This release adds a new behaviour when an EventData node name clashes - a numeric 01 is added as a suffix to the node name.'
+        ReleaseNotes = 'This release adds the ability to process events in XML format as exported by Windows event viewer'
 
         # External dependent modules of this module
         # ExternalModuleDependencies = ''
